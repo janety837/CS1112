@@ -200,14 +200,14 @@ class Robot:
                                                             #get to the item
                                                             #from its current
                                                             #position
+        current_time=len(self._locations)                            
         if item.valid_pickup(self._max_weight,0)==True and\
-        time_to_item+item.duration<=self._total_time and\
+        current_time+time_to_item+item.duration<=self._total_time and\
         item.picked_window==None: #conditions listed above
-            do_pick=True
+            success=True
         else:
-            do_pick=False
-        if do_pick==True:
-            current_time=len(self._locations)
+            success=False
+        if do_pick==True and success==True:
             item.update_pickup_status(current_time+time_to_item)
             new_path=self.steps_to_arrival(item.loc)
             self._locations.pop() #before the new path is added,
@@ -230,7 +230,7 @@ class Robot:
                                                  #appended so that it's easy to
                                                  #see which items were
                                                  #picked up when testing
-        return do_pick
+        return success
 
 
     def draw(self, t):
