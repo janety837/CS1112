@@ -17,11 +17,11 @@ def select_r ( lis , k ):
     
     #the following code determines whether the other terms belong in little_vals
     #or big_vals. Skips over index i because that's splitter.
-    for j in range(i):
+    for j in range(n):
         temp_val=lis[j]
         if temp_val<splitter:
             little_vals.append(temp_val)
-        else:
+        elif temp_val>=splitter and j!=i:
             big_vals.append(temp_val)
     for j in range(i+1,n):
         temp_val=lis[j]
